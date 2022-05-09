@@ -18,7 +18,7 @@ import { Fragment } from 'react';
 import BulkRunButton from "./BulkRunButton"
 import BulkToggleButton from "./BulkToggleButton"
 import StatusField from "./StatusField"
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/material/styles';
 
 const JobFilter = (props: any) => (
     <Filter {...props}>
@@ -52,13 +52,16 @@ const useStyles = makeStyles(theme => ({
     cell: {
         padding: "6px 8px 6px 8px",
     },
+    bold: {
+        fontWeight: "bold",
+    }
 }));
 
 const JobList = (props: any) => {
     const classes = useStyles();
     return (
         <List {...props} filters={<JobFilter />} bulkActionButtons={<JobBulkActionButtons />} pagination={<JobPagination />}>
-            <Datagrid rowClick="show" classes={{rowCell: classes.cell}}>
+            <Datagrid rowClick="show" classes={{rowCell: classes.cell}} >
                 <TextField source="id"
                     cellClassName={classes.hiddenOnSmallScreens}
                     headerClassName={classes.hiddenOnSmallScreens} />
@@ -75,7 +78,7 @@ const JobList = (props: any) => {
                     headerClassName={classes.hiddenOnSmallScreens} />
                 <DateField source="last_success" showTime />
                 <DateField source="last_error" showTime />
-                <BooleanField source="disabled" sortable={false} />
+                <BooleanField source="disabled" sortable={false} label="Enabled" />
                 <NumberField source="retries" sortable={false} />
                 <StatusField source="status" sortable={false} />
                 <DateField source="next" showTime />

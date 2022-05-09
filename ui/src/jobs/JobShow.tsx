@@ -11,17 +11,17 @@ import {
     TabbedShowLayout,
     Tab,
     ReferenceManyField,
-    useNotify, useRedirect, fetchStart, fetchEnd, Button,
+    useNotify, useRedirect, Button,
 } from 'react-admin';
+import { useMutation } from 'react-query';
 import ToggleButton from "./ToggleButton"
 import RunButton from "./RunButton"
 import { JsonField } from "react-admin-json-view";
 import ZeroDateField from "./ZeroDateField";
-import JobIcon from '@material-ui/icons/Update';
-import FullIcon from '@material-ui/icons/BatteryFull';
-import { Tooltip } from '@material-ui/core';
+import JobIcon from '@mui/icons-material/Update';
+import FullIcon from '@mui/icons-material/BatteryFull';
+import { Tooltip } from '@mui/material';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { apiUrl } from '../dataProvider';
 
 const JobShowActions = ({ basePath, data, resource }: any) => (
@@ -37,12 +37,9 @@ const SuccessField = (props: any) => {
 };
 
 const FullButton = ({record}: any) => {
-    const dispatch = useDispatch();
     const notify = useNotify();
     const [loading, setLoading] = useState(false);
     const handleClick = () => {
-        setLoading(true);
-        dispatch(fetchStart()); // start the global loading indicator 
         fetch(`${apiUrl}/jobs/${record.job_name}/executions/${record.id}`)
             .then((response) => {
                 if (response.ok) {
@@ -56,11 +53,11 @@ const FullButton = ({record}: any) => {
                 record.output = data.output
             })
             .catch((e) => {
-                notify('Error on loading full output', 'warning')
+                notify('Error on loading full output', { type: 'warning' })
             })
             .finally(() => {
                 setLoading(false);
-                dispatch(fetchEnd()); // stop the global loading indicator
+                notify('Done loading'); // stop the global loading indicator
             });
     };
     return (
