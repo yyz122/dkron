@@ -1,17 +1,14 @@
 import * as React from "react";
 import Dashboard from './dashboard';
-import { Admin, Resource } from 'react-admin';
+import { Admin, CustomRoutes, Resource } from 'react-admin';
 import dataProvider from './dataProvider';
 import jobs from './jobs';
 import { BusyList } from './executions/BusyList';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { Layout } from './layout';
-import customRoutes from './routes';
-import themeReducer from './themeReducer';
-import { Provider } from "react-redux";
 import { createHashHistory } from "history";
-import { persistStore } from 'redux-persist';
-import { PersistGate } from "redux-persist/integration/react";
+import { Route } from 'react-router-dom';
+import Configuration from './configuration/Configuration';
 
 declare global {
     interface Window {
@@ -34,9 +31,10 @@ const App = () => (
         dataProvider={dataProvider}
         history={history}
         layout={Layout}
-        customRoutes={customRoutes}
-        customReducers={{ theme: themeReducer }}
     >
+        <CustomRoutes>
+            <Route path="/configuration" element={<Configuration />}/>
+        </CustomRoutes>
         <Resource name="jobs" {...jobs} />
         <Resource name="busy" options={{ label: 'Busy' }} list={BusyList} icon={PlayCircleOutlineIcon} />
         <Resource name="executions" />

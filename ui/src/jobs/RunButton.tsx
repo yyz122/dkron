@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNotify, useRefresh, Button } from 'react-admin';
 import { apiUrl } from '../dataProvider';
 import RunIcon from '@mui/icons-material/PlayArrow';
 
 const RunButton = ({record}: any) => {
-    const dispatch = useDispatch();
     const refresh = useRefresh();
     const notify = useNotify();
     const [loading, setLoading] = useState(false);

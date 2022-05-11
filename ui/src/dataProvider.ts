@@ -1,6 +1,4 @@
-import { fetchUtils } from 'ra-core';
 import jsonServerProvider from 'ra-data-json-server';
-import { stringify } from 'query-string';
 
 export const apiUrl = window.DKRON_API_URL || 'http://localhost:8080/v1'
 const dataProvider = jsonServerProvider(apiUrl);

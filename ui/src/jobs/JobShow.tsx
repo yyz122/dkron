@@ -11,9 +11,8 @@ import {
     TabbedShowLayout,
     Tab,
     ReferenceManyField,
-    useNotify, useRedirect, Button,
+    useNotify, Button,
 } from 'react-admin';
-import { useMutation } from 'react-query';
 import ToggleButton from "./ToggleButton"
 import RunButton from "./RunButton"
 import { JsonField } from "react-admin-json-view";
