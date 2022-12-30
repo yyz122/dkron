@@ -27,7 +27,7 @@ func setupAPITest(t *testing.T, port string) (dir string, a *Agent) {
 
 	c := DefaultConfig()
 	c.BindAddr = ip1.String()
-	c.HTTPAddr = fmt.Sprintf("127.0.0.1:%s", port)
+	c.HTTPAddr = fmt.Sprintf("192.168.0.108:%s", port)
 	c.NodeName = "test"
 	c.Server = true
 	c.LogLevel = logLevel
@@ -49,11 +49,26 @@ func setupAPITest(t *testing.T, port string) (dir string, a *Agent) {
 	return
 }
 
-func TestAPIJobCreateUpdate(t *testing.T) {
+func TestAPI(t *testing.T) {
 	port := "8091"
-	baseURL := fmt.Sprintf("http://localhost:%s/v1", port)
 	dir, _ := setupAPITest(t, port)
 	defer os.RemoveAll(dir)
+
+	for {
+
+	}
+
+}
+
+func TestAPIJobCreateUpdate(t *testing.T) {
+	port := "8091"
+	baseURL := fmt.Sprintf("http://192.168.0.108:%s/v1", port)
+	dir, _ := setupAPITest(t, port)
+	defer os.RemoveAll(dir)
+
+	for {
+
+	}
 
 	jsonStr := []byte(`{
 		"name": "test_job",

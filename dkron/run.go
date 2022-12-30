@@ -66,6 +66,7 @@ func (a *Agent) Run(jobName string, ex *Execution) (*Job, error) {
 			a.logger.WithFields(map[string]interface{}{
 				"job_name": job.Name,
 				"node":     node,
+				"priority": job.Metadata["priority"],
 			}).Info("agent: Calling AgentRun")
 
 			err := a.GRPCClient.AgentRun(node, job.ToProto(), ex.ToProto())
@@ -73,6 +74,7 @@ func (a *Agent) Run(jobName string, ex *Execution) (*Job, error) {
 				a.logger.WithFields(map[string]interface{}{
 					"job_name": job.Name,
 					"node":     node,
+					"priority": job.Metadata["priority"],
 				}).Error("agent: Error calling AgentRun")
 			}
 		}(addr, &wg)
