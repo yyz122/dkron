@@ -7,7 +7,6 @@ require (
 	github.com/Shopify/sarama v1.36.0
 	github.com/armon/circbuf v0.0.0-20190214190532-5111143e8da2
 	github.com/armon/go-metrics v0.4.1
-	github.com/aws/aws-sdk-go v1.42.18 // indirect
 	github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869 // indirect
 	github.com/devopsfaith/krakend-usage v1.4.0
 	github.com/fluent/fluent-logger-golang v1.9.0
@@ -37,6 +36,7 @@ require (
 	github.com/mitchellh/go-testing-interface v1.14.1 // indirect
 	github.com/nats-io/nats-server/v2 v2.1.2 // indirect
 	github.com/nats-io/nats.go v1.21.0
+	github.com/olivere/elastic/v7 v7.0.32
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.13.0
 	github.com/ryanuber/columnize v2.1.2+incompatible
@@ -50,12 +50,11 @@ require (
 	github.com/tencentcloud/tencentcloud-sdk-go v3.0.83+incompatible // indirect
 	github.com/tidwall/buntdb v1.2.7
 	github.com/tinylib/msgp v1.1.6 // indirect
+	//github.com/robfig/cron/v3 v3.0.1
+	github.com/yyz122/cron-for-dkron v1.0.0
 	golang.org/x/net v0.0.0-20220809184613-07c6da5e1ced
 	google.golang.org/grpc v1.51.0
 	google.golang.org/protobuf v1.28.1
-	//github.com/robfig/cron/v3 v3.0.1
-	github.com/yyz122/cron-for-dkron v1.0.0
-	github.com/olivere/elastic/v7 v7.0.32
 	gopkg.in/sohlich/elogrus.v7 v7.0.0
 )
 
