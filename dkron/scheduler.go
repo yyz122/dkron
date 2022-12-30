@@ -9,8 +9,8 @@ import (
 
 	"github.com/armon/go-metrics"
 	"github.com/distribworks/dkron/v3/extcron"
-	"github.com/robfig/cron/v3"
 	"github.com/sirupsen/logrus"
+	"github.com/yyz122/cron-for-dkron"
 )
 
 var (

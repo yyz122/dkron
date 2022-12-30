@@ -39,7 +39,6 @@ require (
 	github.com/nats-io/nats.go v1.21.0
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.13.0
-	github.com/robfig/cron/v3 v3.0.1
 	github.com/ryanuber/columnize v2.1.2+incompatible
 	github.com/sirupsen/logrus v1.9.0
 	github.com/soheilhy/cmux v0.1.5
@@ -54,6 +53,10 @@ require (
 	golang.org/x/net v0.0.0-20220809184613-07c6da5e1ced
 	google.golang.org/grpc v1.51.0
 	google.golang.org/protobuf v1.28.1
+	//github.com/robfig/cron/v3 v3.0.1
+	github.com/yyz122/cron-for-dkron v1.0.0
+	github.com/olivere/elastic/v7 v7.0.32
+	gopkg.in/sohlich/elogrus.v7 v7.0.0
 )
 
 go 1.16

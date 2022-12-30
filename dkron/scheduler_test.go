@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/distribworks/dkron/v3/extcron"
-	"github.com/robfig/cron/v3"
 	"github.com/stretchr/testify/assert"
+	"github.com/yyz122/cron-for-dkron"
 )
 
 func TestSchedule(t *testing.T) {

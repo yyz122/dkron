@@ -4,9 +4,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/robfig/cron/v3"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/yyz122/cron-for-dkron"
 )
 
 func TestCustomSpecSchedule(t *testing.T) {

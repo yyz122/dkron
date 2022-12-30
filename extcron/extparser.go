@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/robfig/cron/v3"
+	"github.com/yyz122/cron-for-dkron"
 )
 
 // ExtParser is a parser extending robfig/cron v3 standard parser with
