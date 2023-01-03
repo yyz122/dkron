@@ -53,7 +53,7 @@ func InitLogger(logLevel string, node string) *logrus.Entry {
 			if err != nil {
 				log.Panic(err)
 			}
-			hook, err := elogrus.NewAsyncElasticHook(client, "", logrus.DebugLevel, "dkron-log")
+			hook, err := elogrus.NewAsyncElasticHook(client, node, logrus.DebugLevel, "dkron-log")
 			if err != nil {
 				log.Panic(err)
 			}
