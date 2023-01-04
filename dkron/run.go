@@ -63,19 +63,35 @@ func (a *Agent) Run(jobName string, ex *Execution) (*Job, error) {
 		wg.Add(1)
 		go func(node string, wg *sync.WaitGroup) {
 			defer wg.Done()
-			a.logger.WithFields(map[string]interface{}{
-				"job_name": job.Name,
-				"node":     node,
-				"priority": job.Metadata["priority"],
-			}).Info("agent: Calling AgentRun")
 
-			err := a.GRPCClient.AgentRun(node, job.ToProto(), ex.ToProto())
-			if err != nil {
+			priority, containsP := job.Metadata["priority"]
+			if containsP {
 				a.logger.WithFields(map[string]interface{}{
 					"job_name": job.Name,
 					"node":     node,
-					"priority": job.Metadata["priority"],
-				}).Error("agent: Error calling AgentRun")
+					"priority": priority,
+				}).Info("agent: Calling AgentRun")
+			} else {
+				a.logger.WithFields(map[string]interface{}{
+					"job_name": job.Name,
+					"node":     node,
+				}).Info("agent: Calling AgentRun")
+			}
+
+			err := a.GRPCClient.AgentRun(node, job.ToProto(), ex.ToProto())
+			if err != nil {
+				if containsP {
+					a.logger.WithFields(map[string]interface{}{
+						"job_name": job.Name,
+						"node":     node,
+						"priority": priority,
+					}).Error("agent: Error calling AgentRun")
+				} else {
+					a.logger.WithFields(map[string]interface{}{
+						"job_name": job.Name,
+						"node":     node,
+					}).Error("agent: Error calling AgentRun")
+				}
 			}
 		}(addr, &wg)
 	}

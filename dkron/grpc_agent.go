@@ -56,8 +56,7 @@ func (as *AgentServer) AgentRun(req *types.AgentRunRequest, stream types.Agent_A
 	execution := req.Execution
 
 	as.logger.WithFields(logrus.Fields{
-		"job":      job.Name,
-		"priority": job.Metadata["priority"],
+		"job": job.Name,
 	}).Info("grpc_agent: Starting job")
 
 	output, _ := circbuf.NewBuffer(maxBufSize)
