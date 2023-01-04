@@ -51,6 +51,18 @@ func (a *Agent) Run(jobName string, ex *Execution) (*Job, error) {
 	}
 	a.logger.WithField("nodes", targetNodes).Debug("agent: Filtered nodes to run")
 
+	//若用户未设置优先级，默认为0
+	if job.Metadata == nil {
+		job.Metadata = map[string]string{
+			"priority": "0",
+		}
+	} else {
+		_, containsP := job.Metadata["priority"]
+		if !containsP {
+			job.Metadata["priority"] = "0"
+		}
+	}
+
 	var wg sync.WaitGroup
 	for _, v := range targetNodes {
 		// Determine node address
@@ -64,34 +76,19 @@ func (a *Agent) Run(jobName string, ex *Execution) (*Job, error) {
 		go func(node string, wg *sync.WaitGroup) {
 			defer wg.Done()
 
-			priority, containsP := job.Metadata["priority"]
-			if containsP {
-				a.logger.WithFields(map[string]interface{}{
-					"job_name": job.Name,
-					"node":     node,
-					"priority": priority,
-				}).Info("agent: Calling AgentRun")
-			} else {
-				a.logger.WithFields(map[string]interface{}{
-					"job_name": job.Name,
-					"node":     node,
-				}).Info("agent: Calling AgentRun")
-			}
+			a.logger.WithFields(map[string]interface{}{
+				"job_name": job.Name,
+				"node":     node,
+				"priority": job.Metadata["priority"],
+			}).Info("agent: Calling AgentRun")
 
 			err := a.GRPCClient.AgentRun(node, job.ToProto(), ex.ToProto())
 			if err != nil {
-				if containsP {
-					a.logger.WithFields(map[string]interface{}{
-						"job_name": job.Name,
-						"node":     node,
-						"priority": priority,
-					}).Error("agent: Error calling AgentRun")
-				} else {
-					a.logger.WithFields(map[string]interface{}{
-						"job_name": job.Name,
-						"node":     node,
-					}).Error("agent: Error calling AgentRun")
-				}
+				a.logger.WithFields(map[string]interface{}{
+					"job_name": job.Name,
+					"node":     node,
+					"priority": job.Metadata["priority"],
+				}).Error("agent: Error calling AgentRun")
 			}
 		}(addr, &wg)
 	}

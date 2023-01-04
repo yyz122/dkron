@@ -27,7 +27,7 @@ func setupAPITest(t *testing.T, port string) (dir string, a *Agent) {
 
 	c := DefaultConfig()
 	c.BindAddr = ip1.String()
-	c.HTTPAddr = fmt.Sprintf("192.168.0.108:%s", port)
+	c.HTTPAddr = fmt.Sprintf("192.168.0.102:%s", port)
 	c.NodeName = "test"
 	c.Server = true
 	c.LogLevel = logLevel
@@ -50,7 +50,7 @@ func setupAPITest(t *testing.T, port string) (dir string, a *Agent) {
 }
 
 func TestAPI(t *testing.T) {
-	port := "8091"
+	port := "8080"
 	dir, _ := setupAPITest(t, port)
 	defer os.RemoveAll(dir)
 
